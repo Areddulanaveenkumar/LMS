@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management   System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body class="container">
+<div class="card text-center">
+    <div class="card-header  bg-primary text-white">
+        <h2>Library Management System</h2>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Welcome to the Library Management System</h5>
+        <a th:href="@{/}" class="btn btn-primary">Libraries</a>
+        <a th:href="@{/sectionMapping}" class="btn btn-primary">Sections</a>
+        <a href="#" class="btn btn-primary">Logout</a>
+    </div>
+    <!--<div class="card-footer text-body-secondary">
+        2 days ago
+    </div>-->
+    <!--<div class="row">
+        <div class="col-4">
+            <a th:href="@{/addNewLibrary}" class="btn btn-primary">Add New Book</a>
+        </div>
+    </div>-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4" >
+                    <a th:href="@{/addNewLibrary}" class="btn btn-primary">Add</a>
+                </div>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form th:action="@{/location}" method="post">
+                <div class="input-group">
+                    <select class="form-select" name="location">
+                        <option value="">Choose Location</option>
+                        <option th:each="library : ${AllLibrary1}" th:value="${library.location}" th:text="${library.location}"></option>
+                    </select>
+                    <!--<button class="btn btn-outline-success" type="submit">Filter</button>-->
+                </div>
+            </form>
+                <form th:action="@{/search}" method="get" class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-4" th:each="library:${AllLibrary}">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${library.name}"></h5>
+                    <h5 class="card-title" th:text="${library.location}"></h5>
+                    <a th:href="@{'/libraryUpdate/'+${library.id}}" class="btn btn-warning">Update</a>
+                    <a th:href="@{'/delete/'+${library.id}}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{'/view/'+${library.id}}" class="btn btn-success">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
